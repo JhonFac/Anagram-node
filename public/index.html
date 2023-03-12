@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Anagramas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body style="background-color: #333333;">
+    <div class="container mt-4">
+      <form id="form">
+        <div class="form-group">
+          <label for="text" style="color: white; ">Ingrese 7 o mas letras:</label>
+          <input type="text" class="form-control" id="text" name="text">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <div class="form-group" style="margin-top: 16px;">
+        <h3 style="color: white; ">se trean como maximo 10 resultados aleatorios de todas las posibilidades</h3>
+        <div class="card form-group">
+          <div class="card-header">
+            <h5 class="mb-0" id="headerTitle"></h5>
+          </div>
+          <div class="card-body">
+            <ul id="solutions"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const form = document.querySelector('form');
+        const input = document.querySelector('input');
+        const list = document.querySelector('ul');
+      
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+      
+          const response = await fetch('http://localhost:3000/anagrams', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: input.value })
+          });
+      
+          const { anagrams, count, t} = await response.json();
+      
+          const headerTitle = document.getElementById("headerTitle");
+          headerTitle.innerText = "Cantidad de Items: "+t+" de " + count;
+
+
+          list.innerHTML = '';
+          anagrams.forEach((anagram) => {
+            const li = document.createElement('li');
+            li.textContent = anagram;
+            list.appendChild(li);
+          });
+        });
+      </script>
+      
+  </body>
+</html>
