@@ -16,7 +16,3 @@ Funcionamiento del código
 El código utiliza la clase AnagramFinder para buscar anagramas en el archivo de palabras palabras.txt. La clase tiene un constructor que toma una cadena de letras y las ordena alfabéticamente para facilitar la búsqueda de anagramas. Luego, utiliza el módulo fs para crear un stream de lectura del archivo palabras.txt y busca cada línea del archivo que sea un anagrama de la cadena de letras ingresada. Finalmente, devuelve una promesa que se resuelve con un arreglo de los anagramas encontrados.
 
 La aplicación Express utiliza el método app.post para recibir solicitudes POST a http://localhost:3000/anagrams y utiliza el módulo body-parser para analizar el cuerpo de la solicitud en formato JSON. Luego, instancia un objeto AnagramFinder con la cadena de letras del cuerpo de la solicitud y llama al método findAnagrams para buscar los anagramas. Cuando se resuelve la promesa, se genera una respuesta HTTP en formato JSON que contiene un arreglo de hasta 10 anagramas, el número total de anagramas encontrados y el número de anagramas devueltos.
-
-
-
-Anagram-_node
